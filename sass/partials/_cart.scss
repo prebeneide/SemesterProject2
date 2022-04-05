@@ -1,0 +1,25 @@
+#cart-title {
+  margin-bottom: 0 !important;
+  @media (max-width: 575px) {
+    margin-top: 1rem !important;
+  }
+}
+
+#cart-product-image {
+  min-width: 100px !important;
+}
+
+#cart-card {
+  .btn {
+    @media (max-width: 465px) {
+      margin-top: 1rem !important;
+    }
+  }
+}
+
+.total-price {
+  background-color: $background-dark;
+  border-radius: 15px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}

@@ -1,0 +1,32 @@
+.product {
+  background-color: $background-dark;
+  border-radius: 15px;
+  margin-bottom: 2em;
+
+  .btn {
+    width: 100%;
+  }
+
+  .card-img-top {
+    border-radius: 15px 15px 0 0;
+  }
+}
+
+.btn {
+  &-primary {
+    background-color: $primary;
+  }
+  &-add-to-cart {
+    background-color: $primary;
+  }
+}
+
+#detail-buy-button {
+  border: none;
+  width: 50%;
+  margin-top: 2rem;
+}
+
+#search {
+  margin-bottom: 1rem;
+}

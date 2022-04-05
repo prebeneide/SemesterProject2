@@ -1,0 +1,28 @@
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Big Shoulders Stencil Display", cursive;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  color: $primary;
+}
+
+h1 {
+  &.home {
+    color: white;
+  }
+}
+
+h2 {
+  color: $primary;
+}
+
+a {
+  color: $primary;
+}

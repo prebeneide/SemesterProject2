@@ -1,0 +1,13 @@
+.product-image {
+  &-small {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+.embed-responsive {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

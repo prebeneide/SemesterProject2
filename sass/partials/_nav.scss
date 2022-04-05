@@ -1,0 +1,21 @@
+.navbar {
+  color: white;
+  text-transform: uppercase;
+
+  &-brand {
+    font-family: "Julius Sans One", sans-serif;
+    font-size: 32px;
+    color: white !important;
+  }
+
+  &-collapse {
+    z-index: 1;
+  }
+
+  &-dark {
+    .nav-link {
+      color: white;
+      font-size: 15px;
+    }
+  }
+}

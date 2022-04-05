@@ -1,0 +1,56 @@
+.carousel-item {
+  background-size: cover;
+  background-position: center center;
+}
+
+.carousel-indicators li {
+  width: 15px;
+  height: 15px;
+  margin: 0 5px;
+  border-radius: 50%;
+}
+
+.carousel-inner {
+  max-height: 600px;
+}
+
+.home-block {
+  margin: 15px;
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  background-color: $background-dark;
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    font-size: 1.2rem;
+    color: $primary;
+  }
+
+  p {
+    font-size: 0.9rem;
+    flex: 1;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    background: $background-dark;
+    border: none;
+    text-transform: uppercase;
+    position: relative;
+
+    @media (min-width: 992px) {
+      width: 50%;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 10px;
+      height: 100%;
+      background: $primary;
+    }
+  }
+}

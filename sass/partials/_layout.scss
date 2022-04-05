@@ -1,0 +1,48 @@
+body,
+html {
+  height: 100%;
+}
+
+body {
+  font-family: $font-primary;
+  background-image: url("../images/asfalt-light.png");
+  background-color: $background-colour;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+#logo {
+  max-width: 100px;
+}
+
+footer {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+  background-color: $nav-colour;
+  margin-top: 2rem;
+  font-size: 0.8em;
+  color: #8d8d8d;
+  padding: 2em;
+
+  a {
+    color: #8d8d8d;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  i {
+    color: #8d8d8d;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.wrapper {
+  flex: 1 0 auto;
+}
