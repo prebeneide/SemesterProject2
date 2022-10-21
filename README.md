@@ -9,12 +9,12 @@ This was our semester project 2. The goal here was to create an e-commerce websi
 - I needed to build an e-commerce website.
 - I could choose the theme of the website.
 - It should follow the site architecture described below.
-- We needed to find a suitable logo, or create one ourself(I created one myself)
-- We should apply all that we have learned in the studies so far(at that time)
+- I needed to find a suitable logo, or create one myself.I created one myself
+- I needed to apply all that we have learned in the studies so far(at that time)
 - The site should have good user experience and UI design.
 
-- We should build a frontend with home, product list, product details and cart pages.
-- We should build admin pages to create, update and delete products.
+- I needed to build a frontend with home, product list, product details and cart pages.
+- I also needed to build admin pages to create, update and delete products.
 - The website should be responsive on all devices.
 - Building a checkout and payment system is not a part of the project.
 
@@ -72,7 +72,7 @@ Each product in the cart should display:
 
 #### Admin section
 
-The admin section (apart from the log in form) should only be accessible to logged in admin users and should include the following features:
+The admin section (apart from the log in form) can only be accessible to logged in admin users and should include the following features:
 
 - Login/Logout
 - Create an admin login form that allows administrator users to login. Use local storage to keep the user logged in.
