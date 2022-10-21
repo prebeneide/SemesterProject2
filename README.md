@@ -1,13 +1,13 @@
 # EUPHORY (SEMESTER PROJECT 2)
 
-This was our semester project 2. The goal here was to create an e-commerce website that had both customer-facing and admin sections. Both sections should be responsive and the website should be populated by a Strapi API supplied by Noroff.
+This was our semester project 2. The goal here was to create an e-commerce website that had both customer-facing and admin sections. Both sections should be responsive and the website needed to be populated by a Strapi API supplied by Noroff.
 
 ## Description
 
 ### Brief
 
-- I should build an e-commerce website.
-- I choose the theme of the website.
+- I needed to build an e-commerce website.
+- I could choose the theme of the website.
 - It should follow the site architecture described below.
 - We needed to find a suitable logo, or create one ourself(I created one myself)
 - We should apply all that we have learned in the studies so far(at that time)
@@ -78,22 +78,22 @@ The admin section (apart from the log in form) should only be accessible to logg
 - Create an admin login form that allows administrator users to login. Use local storage to keep the user logged in.
 
 - When logged in, display a logout button in the layout that logs the user out.
-- Logging out should not clear the cart.
+- Logging out must not clear the cart.
 - Add/edit products
 
-- Create form(s) that allow products to be added and edited.
-- The form should allow the user to toggle whether a product is featured.
+- We needed to create form(s) that allow products to be added and edited.
+- The form needed to allow the user to toggle whether a product is featured.
 
 ###### Product images
 
-For adding/editing product images use either of these 2 methods:
+For adding/editing product images we needed to use either of these 2 methods:
 
-- Use a file upload field to upload images to Strapi, or use a text input that allows a URL to be entered. This allows an image from an external URL to be used as the product image.
+- Use a file upload field to upload images to Strapi, or use a text input that allows a URL to be entered.
 
 ###### Delete existing product
 
 - Allow products to be deleted.
-- Before a product is deleted you must display a confirmation dialog.
+- Before a product is deleted it must display a confirmation dialog.
 - The product should only be deleted if the user confirms.
 
 - I could use CSS libraries like Bootstrap(I used Bootstrap)
