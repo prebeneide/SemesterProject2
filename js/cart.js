@@ -7,20 +7,21 @@ import { getToken } from "./utils/storage.js";
 const token = getToken();
 
 if (token) {
-    location.href = "/";
+  location.href = "/";
 }
 
 createMenu();
-
 
 const productsInCart = getExistingCart();
 
 const cartContainer = document.querySelector(".cart-container");
 
-
-
-if(productsInCart.length === 0) {
-    displayMessage("alert alert-secondary", "No products in cart yet", ".message-container");
+if (productsInCart.length === 0) {
+  displayMessage(
+    "alert alert-secondary",
+    "No products in cart yet",
+    ".message-container"
+  );
 }
 
 const totalContainer = document.querySelector(".total-price");
@@ -28,16 +29,15 @@ let total = 0;
 
 cartContainer.innerHTML = "";
 
-productsInCart.forEach(cart => {
-    total += parseFloat(cart.price);
-    cartContainer.innerHTML += 
-                                                            `<div class="col-md-12 col-lg-12">
+productsInCart.forEach((cart) => {
+  total += parseFloat(cart.price);
+  cartContainer.innerHTML += `<div class="col-md-12 col-lg-12">
                                                                 <div class="card product">
                                                                     <div class="card-body" id="cart-card">
                                                                         <div class="row align-items-center">
                                                                             <div class="col-sm order-sm-1">
                                                                                 <div class="embed-responsive embed-responsive-4by3"
-                                                                                style="background-image:  url(${baseUrl + cart.image});
+                                                                                style="background-image:  url(${cart.image});
                                                                                 background-repeat: no-repeat;
                                                                                 background-position: center;
                                                                                 background-size: cover;" id="cart-product-image">
@@ -58,6 +58,5 @@ productsInCart.forEach(cart => {
                                                                 </div>
                                                             </div>`;
 
-    totalContainer.innerHTML = `<div class="col-9">Total Price: </div> <div class="col-3"> ${total} $ </div>`;
-
+  totalContainer.innerHTML = `<div class="col-9">Total Price: </div> <div class="col-3"> ${total} $ </div>`;
 });

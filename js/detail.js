@@ -1,6 +1,6 @@
 import { getExistingCart } from "./utils/cartFunctions.js";
 import displayMessage from "./components/common/displayMessage.js";
-import { baseUrl } from "./settings/api.js"
+import { baseUrl } from "./settings/api.js";
 import createMenu from "./components/common/createMenu.js";
 
 createMenu();
@@ -9,107 +9,98 @@ const queryString = document.location.search;
 const params = new URLSearchParams(queryString);
 const id = params.get("id");
 
-if(!id) {
-    document.location.href = "/";
+if (!id) {
+  document.location.href = "/";
 }
 
 const productUrl = baseUrl + "/products/" + id;
 
-(async function() {
-    try {
+(async function () {
+  try {
+    const response = await fetch(productUrl);
+    const { data } = await response.json();
+    const details = data;
 
-        const response = await fetch(productUrl);
-        const details = await response.json();
-    
-        document.title = details.title;
+    document.title = details.title;
 
-        const productContainer = document.querySelector(".product-content");
+    const productContainer = document.querySelector(".product-content");
 
-        const productsInCart = getExistingCart();
+    const productsInCart = getExistingCart();
 
-        let cssClass = "btn-dark";
+    let cssClass = "btn-dark";
 
-        const doesObjectExist = productsInCart.find(function(buy) {
+    const doesObjectExist = productsInCart.find(function (buy) {
+      return parseInt(buy.id) === details.id;
+    });
 
-            return parseInt(buy.id) === details.id;
-        });
+    if (doesObjectExist) {
+      cssClass = "btn-add-to-cart";
+    }
 
-        if(doesObjectExist) {
-            cssClass = "btn-add-to-cart";
-        }
-
-        productContainer.innerHTML +=             
-                                        `<div class="row">
+    productContainer.innerHTML += `<div class="row">
                                             <div class="col-md">
-                                                <h2>${details.title}</h2>
+                                                <h2>${details.attributes.title}</h2>
                                                 <p>
-                                                    ${details.description}
+                                                    ${details.attributes.description}
                                                 </p>
                                             </div>
                                             <div class="col-md">
                                                 <ul class="product-list">
-                                                    <li><i class="fa fa-tag"></i> Price: ${details.price} $</li>
+                                                    <li><i class="fa fa-tag"></i> Price: ${details.attributes.price} $</li>
                                                 </ul>
-                                                <a class="btn product ${cssClass}" data-id="${details.id}" data-title="${details.title}" data-price="${details.price}" data-image="${details.image_url}" id="detail-buy-button">Add to cart  <i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                                <a class="btn product ${cssClass}" data-id="${details.id}" data-title="${details.attributes.title}" data-price="${details.attributes.price}" data-image="${details.attributes.image_url}" id="detail-buy-button">Add to cart  <i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
                                             </div>
-                                        </div>`;                           
+                                        </div>`;
 
-        const buyButton = document.querySelector("#detail-buy-button");
+    const buyButton = document.querySelector("#detail-buy-button");
 
+    buyButton.addEventListener("click", handleClick);
 
-        buyButton.addEventListener("click", handleClick);
+    function handleClick() {
+      this.classList.toggle("btn-add-to-cart");
+      this.classList.toggle("btn-dark");
 
-        function handleClick() {
+      const id = this.dataset.id;
+      const title = this.dataset.title;
+      const price = this.dataset.price;
+      const image = this.dataset.image;
 
-            this.classList.toggle("btn-add-to-cart");
-            this.classList.toggle("btn-dark");
+      const currentCart = getExistingCart();
 
-            const id = this.dataset.id;
-            const title = this.dataset.title;
-            const price = this.dataset.price;
-            const image = this.dataset.image;
+      const productExists = currentCart.find(function (buy) {
+        return buy.id === id;
+      });
 
-            const currentCart = getExistingCart();
+      if (productExists === undefined) {
+        const product = { id: id, title: title, price: price, image: image };
+        currentCart.push(product);
+        saveBuys(currentCart);
+      } else {
+        const newBuys = currentCart.filter((buy) => buy.id !== id);
+        saveBuys(newBuys);
+      }
+    }
 
-            const productExists = currentCart.find(function (buy) {
-                return buy.id === id;
-            });
+    function saveBuys(buys) {
+      localStorage.setItem("productsInCart", JSON.stringify(buys));
+    }
 
-            if(productExists === undefined) {
-                const product = { id: id, title: title, price: price, image: image };
-                currentCart.push(product);
-                saveBuys(currentCart);
-            }
-            else {
-                const newBuys = currentCart.filter((buy) => buy.id !== id);
-                saveBuys(newBuys);
-            }
-        
-        }
+    const pageHeading = document.querySelector(".product-top h1");
 
+    pageHeading.innerHTML = `${details.attributes.title}`;
 
-        function saveBuys(buys) {
-            localStorage.setItem("productsInCart", JSON.stringify(buys));
-        }
+    const breadCrumb = document.querySelector(".breadcrumb-item.active");
 
+    breadCrumb.innerHTML = `${details.attributes.title}`;
 
-        const pageHeading = document.querySelector(".product-top h1");
+    const productImage = document.querySelector(
+      ".embed-responsive.embed-responsive-21by9"
+    );
 
-        pageHeading.innerHTML = `${details.title}`;
-
-        const breadCrumb = document.querySelector(".breadcrumb-item.active");
-
-        breadCrumb.innerHTML = `${details.title}`;
-
-        const productImage = document.querySelector(".embed-responsive.embed-responsive-21by9");
-
-        productImage.innerHTML =    `<div class="embed-responsive-item product-detail-image" style="background-image: url(${baseUrl + details.image_url});">
-                                    <span class="background-image" role="img" aria-label="A large productimage of ${details.title}"></span>   
+    productImage.innerHTML = `<div class="embed-responsive-item product-detail-image" style="background-image: url(${details.attributes.image_url});">
+                                    <span class="background-image" role="img" aria-label="A large productimage of ${details.attributes.title}"></span>   
                                     `;
-    
-    }
-    catch (error) {
-        displayMessage("error", error, ".detail-container");
-    }
-
+  } catch (error) {
+    displayMessage("error", error, ".detail-container");
+  }
 })();

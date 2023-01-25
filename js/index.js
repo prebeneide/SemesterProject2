@@ -2,37 +2,30 @@ import { baseUrl } from "./settings/api.js";
 import displayMessage from "./components/common/displayMessage.js";
 import createMenu from "./components/common/createMenu.js";
 
-const bannerUrl = baseUrl + "/home";
+const bannerUrl = baseUrl + "/banners";
 
 createMenu();
 
+(async function () {
+  const bannerContainer = document.querySelector(".banner-container");
 
-(async function() {
+  try {
+    const response = await fetch(bannerUrl);
+    const { data } = await response.json();
+    const json = data[0];
 
-
-    
-    const bannerContainer = document.querySelector(".banner-container");
-
-    try {
-        const response = await fetch(bannerUrl);
-        const json = await response.json();
-
-            bannerContainer.innerHTML = 
-                                            `<div class="carousel-item active embed-responsive-item" style="background-image:url(${baseUrl + json.hero_banner.formats.large.url});">
-                                            <span class="background-image" role="img" aria-label=" A large image of ${json.hero_banner_alt_text}"></span>
+    bannerContainer.innerHTML = `<div class="carousel-item active embed-responsive-item" style="background-image:url(${json.attributes.hero_banner_url});">
+                                            <span class="background-image" role="img" aria-label=" A large image of ${json.attributes.hero_banner_alt_text}"></span>
                                             </div>`;
-
-
-        console.log(json);
-    } catch (error) {
-        console.log(error);
-        displayMessage("error", "An error occured when uploading the banner", ".banner-container");
-    }
-
-
-
+  } catch (error) {
+    console.log(error);
+    displayMessage(
+      "error",
+      "An error occured when uploading the banner",
+      ".banner-container"
+    );
+  }
 })();
-
 
 
 

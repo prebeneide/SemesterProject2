@@ -6,7 +6,7 @@ import { baseUrl } from "./settings/api.js";
 const token = getToken();
 
 if (!token) {
-    location.href = "/";
+  location.href = "/";
 }
 
 createMenu();
@@ -22,55 +22,87 @@ const message = document.querySelector(".message-container");
 form.addEventListener("submit", submitForm);
 
 function submitForm(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    message.innerHTML = "";
+  message.innerHTML = "";
 
-    const titleValue = title.value.trim().toUpperCase();
-    const priceValue = parseFloat(price.value);
-    const descriptionValue = description.value.trim();
-    const imageUrlValue = imageUrl.value;
-    const featuredValue = featured.checked;
+  const titleValue = title.value.trim().toUpperCase();
+  const priceValue = parseFloat(price.value);
+  const descriptionValue = description.value.trim();
+  const imageUrlValue = imageUrl.value;
+  const featuredValue = featured.checked;
 
-    if(titleValue.length === 0 || titleValue.length > 16 || priceValue.length === 0 || isNaN(priceValue) || descriptionValue.length === 0 || imageUrlValue.length === 0 ) {
-        return displayMessage("alert alert-warning", "Please supply proper values", ".message-container");
-    }
+  if (
+    titleValue.length === 0 ||
+    titleValue.length > 16 ||
+    priceValue.length === 0 ||
+    isNaN(priceValue) ||
+    descriptionValue.length === 0 ||
+    imageUrlValue.length === 0
+  ) {
+    return displayMessage(
+      "alert alert-warning",
+      "Please supply proper values",
+      ".message-container"
+    );
+  }
 
-    addProduct(titleValue, priceValue, descriptionValue, featuredValue, imageUrlValue);
+  addProduct(
+    titleValue,
+    priceValue,
+    descriptionValue,
+    featuredValue,
+    imageUrlValue
+  );
 }
 
 async function addProduct(title, price, description, featured, image) {
+  const url = baseUrl + "/products";
 
-    const url = baseUrl + "/products";
+  const data = {
+    title: title,
+    price: price,
+    description: description,
+    featured: featured,
+    image_url: image,
+  };
 
-    
-    const data = JSON.stringify({ title: title, price: price, description: description, featured: featured, image_url: image });
+  const options = {
+    method: "POST",
+    body: JSON.stringify({ data: data }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-
-    const options = {
-        method: "POST",
-        body: data,
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
-    };
-
-    try {
-        const response = await fetch(url, options);
-        const json = await response.json();
-
-        if(json.created_at) {
-            displayMessage("alert alert-success", "Product successfully created", ".message-container");
-            form.reset();
-        }
-
-        if(json.error) {
-            displayMessage("alert alert-danger", json.message , ".message-container");
-        }
+  try {
+    const response = await fetch(url, options);
+    const json = await response.json();
+    const { data } = json;
+    console.log(data);
+    if (data?.attributes.createdAt) {
+      displayMessage(
+        "alert alert-success",
+        "Product successfully created",
+        ".message-container"
+      );
+      form.reset();
     }
-    catch(error) {
-        console.log(error);
-        displayMessage("alert alert-danger", "An error occured, please try again", ".message-container");
+
+    if (json.error) {
+      displayMessage(
+        "alert alert-danger",
+        json.error.message,
+        ".message-container"
+      );
     }
+  } catch (error) {
+    console.log(error);
+    displayMessage(
+      "alert alert-danger",
+      "An error occured, please try again",
+      ".message-container"
+    );
+  }
 }

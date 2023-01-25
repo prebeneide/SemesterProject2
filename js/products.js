@@ -9,18 +9,17 @@ createMenu();
 const productsUrl = baseUrl + "/products";
 
 async function getProducts() {
-    try {
-        const response = await fetch(productsUrl);
-        const json = await response.json();
+  try {
+    const response = await fetch(productsUrl);
+    const { data } = await response.json();
 
-        const products = json;
+    const products = data;
 
-        renderProducts(products);
-        searchProducts(products);
-
-    } catch (error) {
-        displayMessage("alert alert-danger", error, ".message-container");
-    }
-};
+    renderProducts(products);
+    searchProducts(products);
+  } catch (error) {
+    displayMessage("alert alert-danger", error, ".message-container");
+  }
+}
 
 getProducts();
