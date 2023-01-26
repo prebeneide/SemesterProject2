@@ -1,5 +1,4 @@
 import { getExistingCart } from "../utils/cartFunctions.js";
-import { baseUrl } from "../settings/api.js";
 
 export function renderProducts(productsToRender) {
   const productContainer = document.querySelector(".products-container");

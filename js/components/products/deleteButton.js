@@ -1,4 +1,3 @@
-import displayMessage from "../common/displayMessage.js";
 import { baseUrl } from "../../settings/api.js";
 import { getToken } from "../../utils/storage.js";
 

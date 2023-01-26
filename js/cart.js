@@ -1,4 +1,3 @@
-import { baseUrl } from "./settings/api.js";
 import { getExistingCart } from "./utils/cartFunctions.js";
 import displayMessage from "./components/common/displayMessage.js";
 import createMenu from "./components/common/createMenu.js";
