@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Products</title>
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@400;500;600;700&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@400;500;600;700&display=swap");
   </style>
   <link href="css/style.css" rel="stylesheet" />
 </head>
@@ -17,27 +17,65 @@
   <div class="wrapper">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="/">
-        <img src="images/euphory-logo1.png" alt="Euphory logo" id="logo">
+        <img src="images/euphory-logo1.png" alt="Euphory logo" id="logo" />
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto menu-container">
-        </ul>
+        <ul class="navbar-nav ml-auto menu-container"></ul>
       </div>
     </nav>
     <div class="container">
       <h1>PRODUCTS</h1>
       <label for="search">Search</label>
-      <input class="form-control" id="search" placeholder="Search products...">
+      <input class="form-control" id="search" placeholder="Search products..." />
       <div class="message-container"></div>
       <div class="row products-container">
         <div class="col d-flex justify-content-center">
           <div class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div aria-live="polite" aria-atomic="true" style="position: absolute">
+      <div class="toast" id="success" role="alert" data-delay="4000" aria-live="assertive" aria-atomic="true" style="
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            z-index: 999999;
+            width: 400px;
+          ">
+        <div class="toast-header bg-success text-green">
+          <strong class="mr-auto" style="font-size: 24px">Success</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body bg-success" style="font-size: 20px">
+          Product added to your cart
+        </div>
+      </div>
+    </div>
+    <div aria-live="polite" aria-atomic="true" style="position: absolute">
+      <div class="toast" id="danger" role="alert" data-delay="4000" aria-live="assertive" aria-atomic="true" style="
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            z-index: 999999;
+            width: 400px;
+          ">
+        <div class="toast-header bg-success text-green">
+          <strong class="mr-auto" style="font-size: 24px">Success</strong>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body bg-success" style="font-size: 20px">
+          Product removed from the cart
         </div>
       </div>
     </div>

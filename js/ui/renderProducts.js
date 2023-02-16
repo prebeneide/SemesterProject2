@@ -8,7 +8,8 @@ export function renderProducts(productsToRender) {
   productContainer.innerHTML = "";
 
   productsToRender.forEach(function (product) {
-    let cssClass = "btn-dark";
+    let cssClass = "btn-add-to-cart";
+    let btnText = "Add to cart";
 
     const doesObjectExist = productsInCart.find(function (buy) {
       console.log(buy);
@@ -19,7 +20,8 @@ export function renderProducts(productsToRender) {
     console.log(doesObjectExist);
 
     if (doesObjectExist) {
-      cssClass = "btn-add-to-cart";
+      cssClass = "btn-dark";
+      btnText = "Remove from cart";
     }
 
     productContainer.innerHTML += `                      <div class="col-md-6 col-lg-3">
@@ -34,8 +36,8 @@ export function renderProducts(productsToRender) {
                                                                     <div class="card-body">
                                                                         <h5 class="card-title">${product.attributes.title}</h5>
                                                                         <p class="card-text">Price: ${product.attributes.price} $</p>
-                                                                        <a href="product.html?id=${product.id}" class="btn btn-primary">Productinfo</a>
-                                                                        <a class="btn ${cssClass}" data-id="${product.id}" data-title="${product.attributes.title}" data-price="${product.attributes.price}" data-image="${product.attributes.image_url}" id="products-buy-button">Add to cart  <i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                                                        <a href="product.html?id=${product.id}" class="btn btn-dark">Productinfo</a>
+                                                                        <a class="btn ${cssClass} btn-gap" data-id="${product.id}" data-title="${product.attributes.title}" data-price="${product.attributes.price}" data-image="${product.attributes.image_url}" id="products-buy-button">${btnText}  <i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
                                                                     </div>
                                                                 </div>
                                                             </div>`;
@@ -66,9 +68,15 @@ export function renderProducts(productsToRender) {
     if (productExists === undefined) {
       const product = { id: id, title: title, price: price, image: image };
       currentBuys.push(product);
+      this.innerText = "Remove from cart";
+      $("#success").toast("show");
       savebuys(currentBuys);
     } else {
+      $("#danger").toast("show");
+
       const newbuys = currentBuys.filter((buy) => buy.id !== id);
+      this.innerHTML =
+        'Add to cart <i class="fa fa-shopping-bag" aria-hidden="true"></i>';
       savebuys(newbuys);
     }
   }

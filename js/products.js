@@ -6,7 +6,7 @@ import createMenu from "./components/common/createMenu.js";
 
 createMenu();
 
-const productsUrl = baseUrl + "/products";
+const productsUrl = baseUrl + "/products?pagination[start]=0&pagination[limit]=100";
 
 async function getProducts() {
   try {

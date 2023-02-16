@@ -34,7 +34,7 @@ function submitForm(event) {
 
   if (
     titleValue.length === 0 ||
-    titleValue.length > 16 ||
+    titleValue.length === 0 ||
     priceValue.length === 0 ||
     isNaN(priceValue) ||
     descriptionValue.length === 0 ||

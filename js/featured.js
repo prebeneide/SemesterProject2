@@ -1,7 +1,7 @@
 import { baseUrl } from "./settings/api.js";
 import displayMessage from "./components/common/displayMessage.js";
 
-const productsUrl = baseUrl + "/products";
+const productsUrl = baseUrl + "/products?pagination[start]=0&pagination[limit]=100";
 
 (async function () {
   const featuredContainer = document.querySelector(".featured .row");

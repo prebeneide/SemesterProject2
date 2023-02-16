@@ -20,7 +20,11 @@ h1 {
 }
 
 h2 {
-  color: $primary;
+  color: black !important;
+}
+
+.featured-heading {
+  font-size: 200px !important;
 }
 
 a {

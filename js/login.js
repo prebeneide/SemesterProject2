@@ -77,6 +77,3 @@ async function doLogin(username, password) {
     console.log(error);
   }
 }
-
-
-

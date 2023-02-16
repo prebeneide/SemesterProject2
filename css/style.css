@@ -58,6 +58,12 @@ body {
   background-color: #fff;
 }
 
+.featured-heading {
+  font-size: 3rem;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
 }
@@ -427,6 +433,10 @@ mark,
 .mark {
   padding: 0.2em;
   background-color: #fcf8e3;
+}
+
+.btn-gap {
+  margin-top: 20px;
 }
 
 .list-unstyled {
@@ -7134,7 +7144,8 @@ button.bg-secondary:focus {
 }
 
 .bg-success {
-  background-color: #28a745 !important;
+  background-color: #262525 !important;
+  color: white !important;
 }
 
 a.bg-success:hover, a.bg-success:focus,
@@ -10604,7 +10615,15 @@ button.bg-dark:focus {
 }
 
 .text-white {
-  color: #fff !important;
+  color: white;
+}
+
+.text-green {
+  color: #a7eb1f !important;
+}
+
+.text-grey {
+  color: grey;
 }
 
 .text-primary {

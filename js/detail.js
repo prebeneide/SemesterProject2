@@ -21,20 +21,22 @@ const productUrl = baseUrl + "/products/" + id;
     const { data } = await response.json();
     const details = data;
 
-    document.title = details.title;
+    document.title = details.attributes.title;
 
     const productContainer = document.querySelector(".product-content");
 
     const productsInCart = getExistingCart();
 
-    let cssClass = "btn-dark";
+    let cssClass = "btn-add-to-cart";
+    let btnText = "Add to cart";
 
     const doesObjectExist = productsInCart.find(function (buy) {
       return parseInt(buy.id) === details.id;
     });
 
     if (doesObjectExist) {
-      cssClass = "btn-add-to-cart";
+      cssClass = "btn-dark";
+      btnText = "Remove from cart";
     }
 
     productContainer.innerHTML += `<div class="row">
@@ -45,10 +47,12 @@ const productUrl = baseUrl + "/products/" + id;
                                                 </p>
                                             </div>
                                             <div class="col-md">
-                                                <ul class="product-list">
+                                                <ul class="product-list d-flex justify-content-center">
                                                     <li><i class="fa fa-tag"></i> Price: ${details.attributes.price} $</li>
                                                 </ul>
-                                                <a class="btn product ${cssClass}" data-id="${details.id}" data-title="${details.attributes.title}" data-price="${details.attributes.price}" data-image="${details.attributes.image_url}" id="detail-buy-button">Add to cart  <i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                                <div class="d-flex justify-content-center">
+                                                  <button class="btn product ${cssClass} " data-id="${details.id}" data-title="${details.attributes.title}" data-price="${details.attributes.price}" data-image="${details.attributes.image_url}" id="detail-buy-button">${btnText}  <i class="fa fa-shopping-bag" aria-hidden="true"></i></button>
+                                                </div>
                                             </div>
                                         </div>`;
 
@@ -66,7 +70,6 @@ const productUrl = baseUrl + "/products/" + id;
       const image = this.dataset.image;
 
       const currentCart = getExistingCart();
-
       const productExists = currentCart.find(function (buy) {
         return buy.id === id;
       });
@@ -75,8 +78,12 @@ const productUrl = baseUrl + "/products/" + id;
         const product = { id: id, title: title, price: price, image: image };
         currentCart.push(product);
         saveBuys(currentCart);
+        this.innerText = "Remove from cart";
+        $("#success").toast("show");
       } else {
+        $("#danger").toast("show");
         const newBuys = currentCart.filter((buy) => buy.id !== id);
+        this.innerHTML = `Add to cart  <i class="fa fa-shopping-bag" aria-hidden="true"></i>`;
         saveBuys(newBuys);
       }
     }
